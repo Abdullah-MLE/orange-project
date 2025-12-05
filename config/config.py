@@ -29,7 +29,7 @@ DETECT_CLASS_IDS = None
 # =============================================================================
 # Camera ID or video file path.
 # Use 0 for the default webcam, 1 for external, or a path to a video file.
-CAMERA_ID = "test1.mp4"
+CAMERA_ID = 0
 
 # Desired frame width and height.
 FRAME_WIDTH = 1280
@@ -58,7 +58,7 @@ LINE_ORIENTATION = "horizontal"
 # Position of the line as a percentage of frame dimension (0.0 - 1.0).
 # If horizontal, this is Y position (0.5 = middle).
 # If vertical, this is X position.
-LINE_POSITION = 0.5
+LINE_POSITION = 0.3
 
 # Color of the counting line (B, G, R).
 LINE_COLOR = (0, 0, 255)  # Red
@@ -98,11 +98,7 @@ NON_ORANGE_LOG_DIR = "logs/non_orange"
 # Toggle to save non-orange crops.
 SAVE_NON_ORANGE = True
 
-# =============================================================================
-# QUEUE CONFIGURATION
-# =============================================================================
-# Maximum size of the queue.
-QUEUE_MAX_SIZE = 1000
+
 
 # =============================================================================
 # GUI CONFIGURATION
@@ -118,6 +114,13 @@ COLOR_FRESH = (0, 255, 0)   # Green
 COLOR_ROTTEN = (0, 0, 255)  # Red
 COLOR_UNKNOWN = (255, 255, 0) # Cyan/Yellowish
 COLOR_TEXT = (255, 255, 255) # White
+
+# =============================================================================
+# SERIAL CONFIGURATION
+# =============================================================================
+# Serial port for hardware communication (e.g., Arduino/ESP32).
+SERIAL_PORT = "COM5"
+BAUD_RATE = 115200
 
 # Create directories if they don't exist
 os.makedirs(NON_ORANGE_LOG_DIR, exist_ok=True)

@@ -14,12 +14,7 @@ class ObjectClassifier:
     def __init__(self, model_path=None):
         self.model_path = model_path if model_path else config.MODEL_CLASS_PATH
         print(f"Loading Classification Model from: {self.model_path}")
-        try:
-            self.model = YOLO(self.model_path)
-        except Exception as e:
-            print(f"Warning: Could not load classifier model at {self.model_path}. "
-                  f"Ensure the model exists. Error: {e}")
-            self.model = None
+        self.model = YOLO(self.model_path)
 
     def classify_batch(self, crops):
         """

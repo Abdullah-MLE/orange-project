@@ -1,4 +1,18 @@
+# GUI Framework
+customtkinter>=5.2.0
+
+# Image Processing
+opencv-python>=4.8.0
+Pillow>=10.0.0
+
+# Plotting
+matplotlib>=3.7.0
+
+# Machine Learning
 ultralytics
-opencv-python
-numpy
-Pillow
+
+# Serial Communication
+pyserial>=3.5
+
+# Other dependencies
+numpy>=1.24.0

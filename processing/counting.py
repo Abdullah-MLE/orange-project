@@ -29,6 +29,7 @@ class LineCounter:
         self.counts = {
             "fresh": 0,
             "rotten": 0,
+            "non_orange": 0,
             "total": 0
         }
 
@@ -84,8 +85,9 @@ class LineCounter:
         if label in self.counts:
             self.counts[label] += 1
         else:
-            # Maybe log unknown?
-            pass
+            # Fallback for unknown labels, treat as non_orange or ignore
+            if label not in ["fresh", "rotten"]:
+                 self.counts["non_orange"] += 1
 
     def get_counts(self):
         return self.counts

@@ -13,11 +13,7 @@ class ObjectDetector:
     def __init__(self, model_path=None):
         self.model_path = model_path if model_path else config.MODEL_OD_PATH
         print(f"Loading Object Detection Model from: {self.model_path}")
-        try:
-            self.model = YOLO(self.model_path)
-        except Exception as e:
-            print(f"Error loading model: {e}")
-            raise e
+        self.model = YOLO(self.model_path)
 
     def detect(self, frame, conf=None, iou=None):
         """

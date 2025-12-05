@@ -17,7 +17,4 @@ def save_crop(crop, track_id, label, is_non_orange=False):
     
     if is_non_orange:
         path = os.path.join(config.NON_ORANGE_LOG_DIR, filename)
-        try:
-            cv2.imwrite(path, crop)
-        except Exception as e:
-            print(f"Error saving crop: {e}")
+        cv2.imwrite(path, crop)

@@ -50,7 +50,5 @@ logs/
 *.mov
 *.mkv
 
-# Models
-models/*.pt
-models/*.onnx
-!models/best.pt
+test.py
+flutter
