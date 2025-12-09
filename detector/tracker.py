@@ -45,6 +45,3 @@ class ObjectTracker:
             verbose=False
         )
         return results
-
-    def update_tracker_type(self, tracker_type):
-        self.tracker_type = tracker_type

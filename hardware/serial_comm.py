@@ -36,14 +36,14 @@ class SerialCommunicator:
 
     def send_classification(self, value):
         """
-        Send a classification value (0 or 1).
+        Send a classification value ('R' or 'F').
         """
         if self.connected and self.ser:
             try:
-                # Ensure value is integer 0 or 1
-                val_to_send = str(int(value)).encode('utf-8')
+                # Send the string value directly with newline
+                val_to_send = f"{value}\n".encode('utf-8')
                 self.ser.write(val_to_send)
-                print(f"Serial Sent Value: {value}")
+                print(f"Serial Sent Value: {value}\\n")
             except Exception as e:
                 print(f"Serial Error sending value {value}: {e}")
                 self.connected = False

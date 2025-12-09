@@ -5,7 +5,7 @@ import os
 # =============================================================================
 # Path to the YOLOv8n object detection model.
 # This model is responsible for detecting oranges in the frame.
-MODEL_OD_PATH = "models/yolov8n.pt"
+MODEL_OD_PATH = "models/yolo11n.pt"
 
 # Path to the custom classification model.
 # This model classifies cropped orange images as 'fresh' or 'rotten'.
@@ -29,7 +29,7 @@ DETECT_CLASS_IDS = None
 # =============================================================================
 # Camera ID or video file path.
 # Use 0 for the default webcam, 1 for external, or a path to a video file.
-CAMERA_ID = 0
+CAMERA_ID = 'http://10.181.240.97:8080/video'
 
 # Desired frame width and height.
 FRAME_WIDTH = 1280
@@ -53,12 +53,12 @@ TRACKER_CONFIG = "botsort.yaml"
 # COUNTING LINE CONFIGURATION
 # =============================================================================
 # Orientation of the counting line: 'horizontal' or 'vertical'.
-LINE_ORIENTATION = "horizontal"
+LINE_ORIENTATION = "vertical"
 
 # Position of the line as a percentage of frame dimension (0.0 - 1.0).
 # If horizontal, this is Y position (0.5 = middle).
 # If vertical, this is X position.
-LINE_POSITION = 0.3
+LINE_POSITION = 0.7
 
 # Color of the counting line (B, G, R).
 LINE_COLOR = (0, 0, 255)  # Red
@@ -69,7 +69,7 @@ LINE_THICKNESS = 2
 # Direction of movement to count.
 # For horizontal line: 'down' (y increases) or 'up' (y decreases).
 # For vertical line: 'right' (x increases) or 'left' (x decreases).
-COUNT_DIRECTION = "up"
+COUNT_DIRECTION = "left"
 
 # =============================================================================
 # CLASSIFICATION & BUFFER CONFIGURATION
@@ -119,7 +119,7 @@ COLOR_TEXT = (255, 255, 255) # White
 # SERIAL CONFIGURATION
 # =============================================================================
 # Serial port for hardware communication (e.g., Arduino/ESP32).
-SERIAL_PORT = "COM5"
+SERIAL_PORT = "COM7"
 BAUD_RATE = 115200
 
 # Create directories if they don't exist

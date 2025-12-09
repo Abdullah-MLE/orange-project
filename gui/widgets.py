@@ -167,7 +167,7 @@ class ControlPanel(ctk.CTkFrame):
         self.btn_start = ctk.CTkButton(
             buttons_frame, 
             text="START",
-            command=self.callbacks['start_camera'],
+            command=self.callbacks['start_conveyor_belt'],
             fg_color="#22c55e",
             hover_color="#16a34a",
             font=ctk.CTkFont(size=13, weight="bold"),
@@ -180,7 +180,7 @@ class ControlPanel(ctk.CTkFrame):
         self.btn_stop = ctk.CTkButton(
             buttons_frame,
             text="STOP",
-            command=self.callbacks['stop_camera'],
+            command=self.callbacks['stop_conveyor_belt'],
             fg_color="#ef4444",
             hover_color="#dc2626",
             font=ctk.CTkFont(size=13, weight="bold"),

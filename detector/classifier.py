@@ -39,6 +39,3 @@ class ObjectClassifier:
             predictions.append((top_class_id, conf))
             
         return predictions
-
-    def get_label_name(self, class_id):
-        return config.CLASS_LABELS.get(class_id, "unknown")

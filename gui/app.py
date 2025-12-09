@@ -155,8 +155,8 @@ class App:
             'toggle_class': self.toggle_class,
             'toggle_save_crops': self.toggle_save_crops,
             'clear_logs': self.clear_logs,
-            'start_camera': self.start_camera,
-            'stop_camera': self.stop_camera,
+            'start_conveyor_belt': self.start_conveyor_belt,
+            'stop_conveyor_belt': self.stop_conveyor_belt,
             'toggle_logs': self.toggle_logs,
             'reset_hardware': self.reset_hardware
         }
@@ -226,14 +226,14 @@ class App:
         self.logs.log(msg)
         print(msg)
 
-    def start_camera(self):
-        self.serial.send_command("start")
+    def start_conveyor_belt(self):
+        self.serial.send_command("START")
         self.belt_status = "Running"
         self.update_status_bar()
         self.log("Conveyor belt started")
 
-    def stop_camera(self):
-        self.serial.send_command("stop")
+    def stop_conveyor_belt(self):
+        self.serial.send_command("STOP")
         self.belt_status = "Stopped"
         self.update_status_bar()
         self.log("Conveyor belt stopped")
@@ -360,26 +360,33 @@ class App:
 
                     removed_buffers = self.aggregator.cleanup()
                     for buf in removed_buffers:
-                        if buf.od_class_name == "orange":
-                            label = "rotten" if buf.classification_result == 1 else "fresh"
-                        else:
-                            label = "non_orange"
+                        # Logic: 
+                        # - If not orange -> 'R'
+                        # - If orange and rotten -> 'R'
+                        # - If orange and fresh -> 'F'
                         
-                        serial_val = 1 if label == "fresh" else 0
+                        serial_val = 'R'
+                        log_label = "Non-orange/Rotten"
+                        
+                        if buf.od_class_name == "orange":
+                            if not buf.is_rotten:
+                                serial_val = 'F'
+                                log_label = "Fresh"
+                            else:
+                                serial_val = 'R'
+                                log_label = "Rotten"
+                        else:
+                            serial_val = 'R'
+                            log_label = "Non-orange"
+                        
+                        # Send the character
                         self.serial.send_classification(serial_val)
 
                         self.log("-" * 40)
                         self.log(f"Object {buf.track_id} exited")
                         self.log(f"   Frames seen: {buf.total_frames}")
                         self.log(f"   Class: {buf.od_class_name}")
-                        
-                        if buf.od_class_name == "orange":
-                            if buf.is_rotten:
-                                self.log(f"   Rotten ({buf.rotten_frames_count} frames)")
-                            else:
-                                self.log(f"   Fresh ({buf.fresh_frames_count} frames)")
-                        else:
-                            self.log("   No classification")
+                        self.log(f"   Verdict: {log_label} -> Sending '{serial_val}'")
 
                     frame = draw_boxes(frame, results, self.aggregator.buffers)
                     frame = draw_counting_line(frame, self.line_counter)
@@ -412,7 +419,7 @@ class App:
                 pass
             self.after_id = None
             
-        self.stop_camera()
+        self.stop_conveyor_belt()
         if self.serial:
             self.serial.close()
             
